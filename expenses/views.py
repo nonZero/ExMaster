@@ -29,7 +29,8 @@ class LoginView(FormView):
         if user is not None and user.is_active:
             login(self.request, user)
             if self.request.GET.get('from'):
-                return redirect(self.request.GET['from']) # SECURITY: check path
+                return redirect(
+                    self.request.GET['from'])  # SECURITY: check path
             return redirect('expenses:list')
 
         form.add_error(None, "Invalid user name or password")
@@ -67,7 +68,6 @@ class CreateExpenseView(LoggedInMixin, CreateView):
     )
 
     success_url = reverse_lazy('expenses:list')
-
 
     def form_valid(self, form):
         form.instance.date = datetime.date.today()

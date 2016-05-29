@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
+
 
 {% block content %}
 
@@ -6,15 +8,14 @@
     &gt;
     Add new expense...
 
-
     <form method="post">
         {% csrf_token %}
-        <ul>
-            {{ form.as_ul }}
-            <li>
-                <button>Add</button>
-            </li>
-        </ul>
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+                Save {% bootstrap_icon "save" %}
+            </button>
+        {% endbuttons %}
     </form>
 
 {% endblock %}
