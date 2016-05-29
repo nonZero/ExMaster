@@ -1,5 +1,6 @@
 import datetime
 
+from django.core.urlresolvers import reverse_lazy
 from django.db.models import Sum
 from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
@@ -22,9 +23,8 @@ class CreateExpenseView(CreateView):
         'title',
     )
 
-    success_url = "/"  # UGLY
+    success_url = reverse_lazy('list')
 
     def form_valid(self, form):
-        form.cleaned_data['accept_terms_of_service']
         form.instance.date = datetime.date.today()
         return super().form_valid(form)
