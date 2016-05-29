@@ -23,7 +23,7 @@ class CreateExpenseView(CreateView):
         'title',
     )
 
-    success_url = reverse_lazy('list')
+    success_url = reverse_lazy('expenses:list')
 
     def form_valid(self, form):
         form.instance.date = datetime.date.today()
