@@ -1,3 +1,9 @@
+<div style="float:right">
+    {{ user }}
+    |
+    <a href="{% url 'logout' %}">Logout</a>
+</div>
+
 <a href="{% url "expenses:list" %}">Expenses</a>
 &gt;
 Add new expense...

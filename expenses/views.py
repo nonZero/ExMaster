@@ -1,9 +1,10 @@
 import datetime
 
 from django.contrib.auth import authenticate, login, logout
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.db.models import Sum
 from django.shortcuts import redirect
+from django.utils.encoding import escape_uri_path
 from django.views.generic import View
 from django.views.generic.edit import CreateView, FormView
 from django.views.generic.list import ListView
@@ -16,12 +17,19 @@ class LoginView(FormView):
     form_class = forms.LoginForm
     template_name = "login.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated():
+            return redirect('expenses:list')
+        return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
         user = authenticate(username=form.cleaned_data['username'],
                             password=form.cleaned_data['password'])
 
         if user is not None and user.is_active:
             login(self.request, user)
+            if self.request.GET.get('from'):
+                return redirect(self.request.GET['from']) # SECURITY: check path
             return redirect('expenses:list')
 
         form.add_error(None, "Invalid user name or password")
@@ -34,14 +42,22 @@ class LogoutView(View):
         return redirect("login")
 
 
-class ListExpensesView(ListView):
+class LoggedInMixin:
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            url = reverse("login") + "?from=" + escape_uri_path(request.path)
+            return redirect(url)
+        return super().dispatch(request, *args, **kwargs)
+
+
+class ListExpensesView(LoggedInMixin, ListView):
     model = models.Expense
 
     def total(self):
         return self.get_queryset().aggregate(sum=Sum('amount'))['sum']
 
 
-class CreateExpenseView(CreateView):
+class CreateExpenseView(LoggedInMixin, CreateView):
     model = models.Expense
     # form_class = ExpenseForm
     fields = (
@@ -50,6 +66,7 @@ class CreateExpenseView(CreateView):
     )
 
     success_url = reverse_lazy('expenses:list')
+
 
     def form_valid(self, form):
         form.instance.date = datetime.date.today()
