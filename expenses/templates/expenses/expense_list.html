@@ -14,10 +14,16 @@
         {% for object in object_list %}
             <tr>
                 <td>{{ object.date }}</td>
-                <td>{{ object.amount }}</td>
+                <td>${{ object.amount }}</td>
                 <td>{{ object.title }}</td>
             </tr>
         {% endfor %}
-
     </tbody>
+    <tfoot>
+        <tr>
+            <th align="right">total</th>
+            <th>${{ total }}</th>
+            <th></th>
+        </tr>
+    </tfoot>
 </table>
