@@ -14,5 +14,3 @@ class Expense(models.Model):
             self.date,
             self.title,
         )
-
-
