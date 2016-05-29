@@ -55,20 +55,29 @@ class ListExpensesView(LoggedInMixin, ListView):
     page_title = "Home"
     model = models.Expense
 
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
+
     def total(self):
         return self.get_queryset().aggregate(sum=Sum('amount'))['sum']
 
 
 class CreateExpenseView(LoggedInMixin, CreateView):
+    page_title = "Add New Expense"
     model = models.Expense
-    # form_class = ExpenseForm
     fields = (
+        'date',
         'amount',
         'title',
     )
 
     success_url = reverse_lazy('expenses:list')
 
+    def get_initial(self):
+        d = super().get_initial()
+        d['date'] = datetime.date.today()
+        return d
+
     def form_valid(self, form):
-        form.instance.date = datetime.date.today()
+        form.instance.user = self.request.user
         return super().form_valid(form)
