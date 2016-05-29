@@ -51,6 +51,7 @@ class LoggedInMixin:
 
 
 class ListExpensesView(LoggedInMixin, ListView):
+    page_title = "Home"
     model = models.Expense
 
     def total(self):

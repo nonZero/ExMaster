@@ -1,20 +1,20 @@
-<div style="float:right">
-    {{ user }}
-    |
-    <a href="{% url 'logout' %}">Logout</a>
-</div>
+{% extends "base.html" %}
 
-<a href="{% url "expenses:list" %}">Expenses</a>
-&gt;
-Add new expense...
+{% block content %}
+
+    <a href="{% url "expenses:list" %}">Expenses</a>
+    &gt;
+    Add new expense...
 
 
-<form method="post">
-    {% csrf_token %}
-    <ul>
-        {{ form.as_ul }}
-        <li>
-            <button>Add</button>
-        </li>
-    </ul>
-</form>
+    <form method="post">
+        {% csrf_token %}
+        <ul>
+            {{ form.as_ul }}
+            <li>
+                <button>Add</button>
+            </li>
+        </ul>
+    </form>
+
+{% endblock %}
