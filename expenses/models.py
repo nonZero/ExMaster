@@ -1,7 +1,10 @@
+from django.conf import settings
+
 from django.db import models
 
 
 class Expense(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
     date = models.DateField()
     amount = models.DecimalField(max_digits=12,
                                  decimal_places=2)
