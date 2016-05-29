@@ -1,6 +1,8 @@
 import datetime
 from django.db.models import Sum
 from django.shortcuts import render, redirect
+from django.views.generic import FormView
+from django.views.generic.edit import CreateView
 from django.views.generic.list import ListView
 from django import forms
 
@@ -14,30 +16,21 @@ class ListExpensesView(ListView):
         return self.get_queryset().aggregate(sum=Sum('amount'))['sum']
 
 
-# class ExpenseForm(forms.Form):
-#     date = forms.DateField(widget=forms.widgets.Input(attrs={'type': 'date'}))
-#     amount = forms.DecimalField(max_digits=12, decimal_places=2)
-#     title = forms.CharField(max_length=300)
-
 class ExpenseForm(forms.ModelForm):
+    accept_terms_of_service = forms.BooleanField()
     class Meta:
         model = models.Expense
         exclude = (
             'date',
         )
-        # fields = (
-        #     'title',
-        #     'amount',
-        # )
 
 
 # def create_expense(request):
 #     if request.method == "POST":
 #         form = ExpenseForm(request.POST)
 #         if form.is_valid():
-#             o = models.Expense(**form.cleaned_data)
-#             o.full_clean()
-#             o.save()
+#             form.instance.date = datetime.date.today()
+#             o = form.save()
 #             return redirect("/")
 #     else:  # GET
 #         form = ExpenseForm()
@@ -45,16 +38,27 @@ class ExpenseForm(forms.ModelForm):
 #         'form': form,
 #     })
 
+# class CreateExpenseView(FormView):
+#     form_class = ExpenseForm
+#     template_name = "expenses/expense_form.html"
+#
+#     def form_valid(self, form):
+#         form.instance.date = datetime.date.today()
+#         o = form.save()
+#         return redirect("/")
+#
 
-def create_expense(request):
-    if request.method == "POST":
-        form = ExpenseForm(request.POST)
-        if form.is_valid():
-            form.instance.date = datetime.date.today()
-            o = form.save()
-            return redirect("/")
-    else:  # GET
-        form = ExpenseForm()
-    return render(request, "expenses/expense_form.html", {
-        'form': form,
-    })
+class CreateExpenseView(CreateView):
+    model = models.Expense
+    # form_class = ExpenseForm
+    fields = (
+        'amount',
+        'title',
+    )
+
+    success_url = "/" # UGLY
+
+    def form_valid(self, form):
+        form.cleaned_data['accept_terms_of_service']
+        form.instance.date = datetime.date.today()
+        return super().form_valid(form)
