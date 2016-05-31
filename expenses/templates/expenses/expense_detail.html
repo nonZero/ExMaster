@@ -21,7 +21,8 @@
         {% endif %}
         {% if object.photo %}
             <li class="list-group-item">
-                {{ object.photo }}
+                <img src="{{ object.photo.url }}" class="img-responsive">
+
             </li>
         {% endif %}
     </ul>

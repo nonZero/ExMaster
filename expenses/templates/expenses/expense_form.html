@@ -8,7 +8,7 @@
     &gt;
     Add new expense...
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
