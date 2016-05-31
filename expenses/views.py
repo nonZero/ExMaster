@@ -6,6 +6,7 @@ from django.db.models import Sum
 from django.shortcuts import redirect
 from django.utils.encoding import escape_uri_path
 from django.views.generic import View
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, FormView
 from django.views.generic.list import ListView
 
@@ -56,22 +57,54 @@ class ListExpensesView(LoggedInMixin, ListView):
     model = models.Expense
 
     def get_queryset(self):
-        return super().get_queryset().filter(user=self.request.user)
+        return super().get_queryset().filter(account__user=self.request.user)
 
     def total(self):
         return self.get_queryset().aggregate(sum=Sum('amount'))['sum']
+
+
+class ExpenseDetailView(LoggedInMixin, DetailView):
+    page_title = "Detail"
+    model = models.Expense
+
+    def get_queryset(self):
+        return super().get_queryset().filter(account__user=self.request.user)
+
+
+class CreateAccountView(LoggedInMixin, CreateView):
+    page_title = "Add New Account"
+    model = models.Expense
+    form_class = forms.AccountForm
+
+    success_url = reverse_lazy('expenses:list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class CreateExpenseView(LoggedInMixin, CreateView):
     page_title = "Add New Expense"
     model = models.Expense
     fields = (
+        'account',
         'date',
         'amount',
         'title',
+        'description',
+        'photo',
     )
 
-    success_url = reverse_lazy('expenses:list')
+    # success_url = reverse_lazy('expenses:list')
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        # form.fields['account'].queryset = models.Account.objects.filter(
+        #     user=self.request.user)
+        form.fields['account'].queryset = form.fields[
+            'account'].queryset.filter(
+            user=self.request.user)
+        return form
 
     def get_initial(self):
         d = super().get_initial()

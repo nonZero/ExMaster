@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admindocs',
 
     # 3rd party
     'django_extensions',
@@ -128,45 +129,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
-# LOGGING = {
-#     'version': 1,
-#     'disable_existing_loggers': False,
-#     'formatters': {
-#         'verbose': {
-#             'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
-#         },
-#         'simple': {
-#             'format': '%(levelname)s %(message)s'
-#         },
-#     },
-#     'filters': {
-#         'require_debug_true': {
-#             '()': 'django.utils.log.RequireDebugTrue',
-#         },
-#     },
-#     'handlers': {
-#         'console': {
-#             'level': 'DEBUG',
-#             'filters': ['require_debug_true'],
-#             'class': 'logging.StreamHandler',
-#             'formatter': 'simple'
-#         },
-#     },
-#     'loggers': {
-#         'django': {
-#             'handlers': ['console'],
-#             'propagate': True,
-#         },
-#         'django.db.backends': {
-#             'level': 'DEBUG',
-#             'handlers': ['console'],
-#             'propagate': True,
-#         },
-#         # 'django.request': {
-#         #     'handlers': ['mail_admins'],
-#         #     'level': 'ERROR',
-#         #     'propagate': False,
-#         # },
-#     }
-# }
+MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
