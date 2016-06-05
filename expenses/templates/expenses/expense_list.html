@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
 
 {% block content %}
 
@@ -32,6 +33,9 @@
             </tr>
             </tfoot>
         </table>
+
+        {%s bootstrap_pagination page_obj %}
+
     {% else %}
         No expenses.... yet!
     {% endif %}

@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load i18n staticfiles bootstrap3 %}
 
 <!DOCTYPE html>
 <html>
@@ -8,18 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
         {% block title %}
-            {{ view.page_title }} | ExMaster
+            {{ view.page_title }} | {% trans "ExMaster" %}
         {% endblock %}
     </title>
-    <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="{% static "bootstrap/css/bootstrap-rtl.css" %}" rel="stylesheet">
 </head>
-<body>
+<body dir="rtl">
 
 <div class="container">
 
-
-
-    <div style="float:right">
+    <div class="pull-right">
         <a href="{% url "expenses:create_account" %}">Add Account</a>
         |
         <a href="{% url "expenses:create" %}">Add Expense</a>
@@ -32,6 +30,8 @@
     <h1>
         ExMaster!!!!!!!!!!!!!
     </h1>
+
+    {% bootstrap_messages %}
 
     <div>
 

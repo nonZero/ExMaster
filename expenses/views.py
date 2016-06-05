@@ -1,17 +1,40 @@
 import datetime
 
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.db.models import Sum
+from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.utils.encoding import escape_uri_path
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, FormView
 from django.views.generic.list import ListView
 
+
 from . import forms
 from . import models
+
+
+class DummyView(View):
+    def get(self, request):
+        from django.core.mail import send_mail
+
+        send_mail(
+            'Subject here',
+            'Here is the message.',
+            'from@example.com',
+            ['to@example.com'],
+            )
+        request.session['n'] = request.session.get('n', 0) + 1
+        return HttpResponse("n = {}".format(request.session['n']))
+
+
+class DummyView2(View):
+    def get(self, request):
+        assert False, request.session['visits']
 
 
 class LoginView(FormView):
@@ -53,8 +76,9 @@ class LoggedInMixin:
 
 
 class ListExpensesView(LoggedInMixin, ListView):
-    page_title = "Home"
     model = models.Expense
+    paginate_by = 10
+    page_title = _("Home")
 
     def get_queryset(self):
         return super().get_queryset().filter(account__user=self.request.user)
@@ -64,15 +88,22 @@ class ListExpensesView(LoggedInMixin, ListView):
 
 
 class ExpenseDetailView(LoggedInMixin, DetailView):
-    page_title = "Detail"
     model = models.Expense
 
     def get_queryset(self):
         return super().get_queryset().filter(account__user=self.request.user)
 
+    def page_title(self):
+        return self.object.title
+
+        # def get_context_data(self, **kwargs):
+        #     d = super().get_context_data(**kwargs)
+        #     d['title123'] = self.object.title
+        #     return d
+
 
 class CreateAccountView(LoggedInMixin, CreateView):
-    page_title = "Add New Account"
+    page_title = _("Add New Account")
     model = models.Expense
     form_class = forms.AccountForm
 
@@ -80,7 +111,9 @@ class CreateAccountView(LoggedInMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super().form_valid(form)
+        resp = super().form_valid(form)
+        messages.success(self.request, "Account created successfully.")
+        return resp
 
 
 class CreateExpenseView(LoggedInMixin, CreateView):
@@ -102,8 +135,7 @@ class CreateExpenseView(LoggedInMixin, CreateView):
         # form.fields['account'].queryset = models.Account.objects.filter(
         #     user=self.request.user)
         form.fields['account'].queryset = form.fields[
-            'account'].queryset.filter(
-            user=self.request.user)
+            'account'].queryset.filter(user=self.request.user)
         return form
 
     def get_initial(self):
