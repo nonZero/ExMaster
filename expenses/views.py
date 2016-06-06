@@ -13,7 +13,6 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, FormView
 from django.views.generic.list import ListView
 
-
 from . import forms
 from . import models
 
@@ -27,7 +26,7 @@ class DummyView(View):
             'Here is the message.',
             'from@example.com',
             ['to@example.com'],
-            )
+        )
         request.session['n'] = request.session.get('n', 0) + 1
         return HttpResponse("n = {}".format(request.session['n']))
 
@@ -57,7 +56,7 @@ class LoginView(FormView):
                     self.request.GET['from'])  # SECURITY: check path
             return redirect('expenses:list')
 
-        form.add_error(None, "Invalid user name or password")
+        form.add_error(None, _("Invalid user name or password"))
         return self.form_invalid(form)
 
 
@@ -112,12 +111,12 @@ class CreateAccountView(LoggedInMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         resp = super().form_valid(form)
-        messages.success(self.request, "Account created successfully.")
+        messages.success(self.request, _("Account created successfully."))
         return resp
 
 
 class CreateExpenseView(LoggedInMixin, CreateView):
-    page_title = "Add New Expense"
+    page_title = _("Add New Expense")
     model = models.Expense
     fields = (
         'account',

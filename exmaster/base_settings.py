@@ -4,10 +4,10 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
-    "udio.superbootcamp.tech",
+    # "udio.superbootcamp.tech",
 ]
 
 
@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     # 3rd party
     'django_extensions',
     'bootstrap3',
+    'django_babel',
 
     # mine
     "expenses",
@@ -40,6 +41,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_babel.middleware.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'exmaster.urls'
@@ -68,10 +70,8 @@ WSGI_APPLICATION = 'exmaster.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'exmaster',
-        'USER': 'exmaster',
-        'PASSWORD': 'exmaster',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -98,7 +98,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us'
 LANGUAGE_CODE = 'he'
 
 TIME_ZONE = 'Asia/Jerusalem'
