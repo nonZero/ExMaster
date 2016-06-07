@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load bootstrap3 %}
+{% load i18n bootstrap3 %}
 
 {% block content %}
 
@@ -7,9 +7,9 @@
         <table class="table table-bordered">
             <thead>
             <tr>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Title</th>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Amount" %}</th>
+                <th>{% trans "Title" %}</th>
             </tr>
             </thead>
             <tbody>
@@ -27,7 +27,7 @@
             </tbody>
             <tfoot>
             <tr>
-                <th align="right">total</th>
+                <th align="right">{% trans "total" %}</th>
                 <th>${{ view.total }}</th>
                 <th></th>
             </tr>
@@ -37,7 +37,7 @@
         {% bootstrap_pagination page_obj %}
 
     {% else %}
-        No expenses.... yet!
+        {% trans "No expenses.... yet!" %}
     {% endif %}
 
 

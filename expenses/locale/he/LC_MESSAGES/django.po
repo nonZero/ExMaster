@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-06 14:52+0300\n"
-"PO-Revision-Date: 2016-06-06 14:52+0300\n"
+"POT-Creation-Date: 2016-06-07 10:27+0300\n"
+"PO-Revision-Date: 2016-06-07 10:27+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -24,17 +24,33 @@ msgstr ""
 msgid "user"
 msgstr "משתמש"
 
-#: .\expenses\models.py:37
+#: .\expenses\models.py:37 .\expenses\models.py:51
 msgid "title"
 msgstr "כותרת"
 
-#: .\expenses\models.py:40
+#: .\expenses\models.py:40 .\expenses\models.py:48
 msgid "account"
 msgstr "חשבון"
 
 #: .\expenses\models.py:41
 msgid "accounts"
 msgstr "חשבונות"
+
+#: .\expenses\models.py:49
+msgid "date"
+msgstr "תאריך"
+
+#: .\expenses\models.py:50
+msgid "amount"
+msgstr "כמות"
+
+#: .\expenses\models.py:52
+msgid "description"
+msgstr "תקציר"
+
+#: .\expenses\models.py:54
+msgid "photo"
+msgstr "תמונה"
 
 #: .\expenses\templates\404.html:5 .\expenses\templates\404.html:10
 msgid "404 Not Found"
@@ -67,6 +83,38 @@ msgstr "התנתק"
 #: .\expenses\templates\base.html:32
 msgid "ExMaster!!!!!!!!!!!!!"
 msgstr "מנהל חשבונות!!!!!!!!!!!!!"
+
+#: .\expenses\templates\expenses\expense_form.html:7
+msgid "Expenses"
+msgstr "הוסף הוצאה"
+
+#: .\expenses\templates\expenses\expense_form.html:9
+msgid "Add new expense..."
+msgstr "הוסף הוצאה חדשה"
+
+#: .\expenses\templates\expenses\expense_form.html:16
+msgid "Save "
+msgstr "שמור"
+
+#: .\expenses\templates\expenses\expense_list.html:10
+msgid "Date"
+msgstr "תאריך"
+
+#: .\expenses\templates\expenses\expense_list.html:11
+msgid "Amount"
+msgstr "כמות"
+
+#: .\expenses\templates\expenses\expense_list.html:12
+msgid "Title"
+msgstr "שם"
+
+#: .\expenses\templates\expenses\expense_list.html:30
+msgid "total"
+msgstr "סכום"
+
+#: .\expenses\templates\expenses\expense_list.html:40
+msgid "No expenses.... yet!"
+msgstr "אין הוצאות.... עדיין!"
 
 #: .\expenses\templates\login.html:13
 msgid "Login"

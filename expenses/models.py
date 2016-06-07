@@ -45,13 +45,13 @@ class Account(models.Model):
 
 
 class Expense(models.Model):
-    account = models.ForeignKey(Account, related_name='expenses')
-    date = models.DateField(db_index=True)
-    amount = models.DecimalField(max_digits=12, decimal_places=2)
-    title = models.CharField(max_length=200)
-    description = models.TextField(null=True, blank=True)
+    account = models.ForeignKey(Account, related_name='expenses', verbose_name=_("account"))
+    date = models.DateField(_("date"), db_index=True)
+    amount = models.DecimalField(_("amount"), max_digits=12, decimal_places=2)
+    title = models.CharField(_("title"), max_length=200)
+    description = models.TextField(_("description"), null=True, blank=True)
     # TODO: add security
-    photo = models.ImageField(upload_to="expenses/", null=True, blank=True)
+    photo = models.ImageField(_("photo"), upload_to="expenses/", null=True, blank=True)
 
     def __str__(self):
         return "[#{}] ${}@{} ({})".format(
