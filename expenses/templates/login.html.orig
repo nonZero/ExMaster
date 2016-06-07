@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
 {% load i18n staticfiles bootstrap3%}
 {% block content %}
 <body>
@@ -17,3 +18,18 @@
     </div>
 </body>
 {% endblock %}
+=======
+{% load bootstrap3 %}
+{% block content %}
+
+<h1>Login</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    <ul>
+        {{ form.as_ul }}
+        <button>Login</button>
+    </ul>
+</form>
+>>>>>>> 02edcbea44de8185b99fa8ed39c6b6bd3ee12a1c

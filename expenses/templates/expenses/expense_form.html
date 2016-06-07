@@ -1,19 +1,19 @@
 {% extends "base.html" %}
-{% load bootstrap3 %}
+{% load i18n bootstrap3 %}
 
 
 {% block content %}
 
-    <a href="{% url "expenses:list" %}">Expenses</a>
+    <a href="{% url "expenses:list" %}">{% trans "Expenses" %}</a>
     &gt;
-    Add new expense...
+    {% trans "Add new expense..." %}
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
             <button type="submit" class="btn btn-primary">
-                Save {% bootstrap_icon "save" %}
+                {% trans "Save " %} {% bootstrap_icon "save" %}
             </button>
         {% endbuttons %}
     </form>
