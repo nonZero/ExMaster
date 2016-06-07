@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+<<<<<<< HEAD
+{% load i18n staticfiles bootstrap3%}
+{% block content %}
+<body>
+    <div class="container">
+    <h1>{{ page_title }}</h1>
+
+        <form method="post">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">
+                        {% trans "Login" %}
+                    </button>
+                {% endbuttons %}
+        </form>
+    </div>
+</body>
+{% endblock %}
+=======
+{% load bootstrap3 %}
+{% block content %}
+
+<h1>Login</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    <ul>
+        {{ form.as_ul }}
+        <button>Login</button>
+    </ul>
+</form>
+>>>>>>> 02edcbea44de8185b99fa8ed39c6b6bd3ee12a1c

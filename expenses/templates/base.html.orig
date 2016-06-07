@@ -1,0 +1,50 @@
+{% load i18n staticfiles bootstrap3 %}
+{% get_current_language as LANGUAGE_CODE %}
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}
+            {{ view.page_title }} | ExMaster
+        {% endblock %}
+    </title>
+    <link href="{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/superhero/bootstrap.min.css" rel="stylesheet"/>
+
+</head>
+
+<body dir={% trans "ltr" %}>
+
+<div class="container">
+
+    <div class={% trans "pull-left" %}>
+        <a href="{% url "expenses:create_account" %}">{% trans "Add Account" %}</a>
+        |
+        <a href="{% url "expenses:create" %}">{% trans "Add Expense" %}</a>
+        |
+        {{ user }}
+        |
+        <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
+    </div>
+
+    <h1>
+        {% trans "ExMaster!!!!!!!!!!!!!" %}
+    </h1>
+
+    <div>
+
+        {% block content %}
+            CONTENT
+        {% endblock %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+<<<<<<< HEAD
+{% load i18n bootstrap3 %}
+=======
+>>>>>>> 02edcbea44de8185b99fa8ed39c6b6bd3ee12a1c
+
+{% block content %}
+
+    {% if object_list.count %}
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{% trans "Date" %}</th>
+                <th>{% trans "Amount" %}</th>
+                <th>{% trans "Title" %}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in object_list %}
+                <tr>
+                    <td>
+                        <a href="{{ object.get_absolute_url }}">
+                            {{ object.date }}
+                        </a>
+                    </td>
+                    <td>${{ object.amount }}</td>
+                    <td>{{ object.title }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+            <tr>
+                <th align="right">{% trans "total" %}</th>
+                <th>${{ view.total }}</th>
+                <th></th>
+            </tr>
+            </tfoot>
+        </table>
+    {% else %}
+        {% trans "No expenses.... yet!" %}
+    {% endif %}
+
+
+{% endblock %}
