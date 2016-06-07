@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-05 09:37+0300\n"
-"PO-Revision-Date: 2016-06-05 09:37+0300\n"
+"POT-Creation-Date: 2016-06-07 10:27+0300\n"
+"PO-Revision-Date: 2016-06-07 10:27+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: he\n"
@@ -16,32 +16,126 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: django.po\n"
 
-#: models.py:36
+#: .\expenses\models.py:36
 msgid "user"
 msgstr "משתמש"
 
-#: models.py:37
+#: .\expenses\models.py:37 .\expenses\models.py:51
 msgid "title"
 msgstr "כותרת"
 
-#: models.py:40
+#: .\expenses\models.py:40 .\expenses\models.py:48
 msgid "account"
 msgstr "חשבון"
 
-#: models.py:41
+#: .\expenses\models.py:41
 msgid "accounts"
 msgstr "חשבונות"
 
-#: templates/base.html:11
+#: .\expenses\models.py:49
+msgid "date"
+msgstr "תאריך"
+
+#: .\expenses\models.py:50
+msgid "amount"
+msgstr "כמות"
+
+#: .\expenses\models.py:52
+msgid "description"
+msgstr "תקציר"
+
+#: .\expenses\models.py:54
+msgid "photo"
+msgstr "תמונה"
+
+#: .\expenses\templates\404.html:5 .\expenses\templates\404.html:10
+msgid "404 Not Found"
+msgstr "404 לא נמצא"
+
+#: .\expenses\templates\404.html:5 .\expenses\templates\base.html:11
 msgid "ExMaster"
 msgstr "אלוף ההוצאות"
 
-#: views.py:79
+#: .\expenses\templates\base.html:17
+msgid "ltr"
+msgstr "rtl"
+
+#: .\expenses\templates\base.html:21
+msgid "pull-left"
+msgstr "pull-right"
+
+#: .\expenses\templates\base.html:22
+msgid "Add Account"
+msgstr "הוספת חשבון חדש"
+
+#: .\expenses\templates\base.html:24
+msgid "Add Expense"
+msgstr "הוסף הוצאה"
+
+#: .\expenses\templates\base.html:28
+msgid "Logout"
+msgstr "התנתק"
+
+#: .\expenses\templates\base.html:32
+msgid "ExMaster!!!!!!!!!!!!!"
+msgstr "מנהל חשבונות!!!!!!!!!!!!!"
+
+#: .\expenses\templates\expenses\expense_form.html:7
+msgid "Expenses"
+msgstr "הוסף הוצאה"
+
+#: .\expenses\templates\expenses\expense_form.html:9
+msgid "Add new expense..."
+msgstr "הוסף הוצאה חדשה"
+
+#: .\expenses\templates\expenses\expense_form.html:16
+msgid "Save "
+msgstr "שמור"
+
+#: .\expenses\templates\expenses\expense_list.html:10
+msgid "Date"
+msgstr "תאריך"
+
+#: .\expenses\templates\expenses\expense_list.html:11
+msgid "Amount"
+msgstr "כמות"
+
+#: .\expenses\templates\expenses\expense_list.html:12
+msgid "Title"
+msgstr "שם"
+
+#: .\expenses\templates\expenses\expense_list.html:30
+msgid "total"
+msgstr "סכום"
+
+#: .\expenses\templates\expenses\expense_list.html:40
+msgid "No expenses.... yet!"
+msgstr "אין הוצאות.... עדיין!"
+
+#: .\expenses\templates\login.html:13
+msgid "Login"
+msgstr "התחבר"
+
+#: .\expenses\views.py:59
+msgid "Invalid user name or password"
+msgstr "שם משתמש או סיסמה שגוי"
+
+#: .\expenses\views.py:80
 msgid "Home"
 msgstr "בית"
 
-#: views.py:105
+#: .\expenses\views.py:105
 msgid "Add New Account"
 msgstr "הוספת חשבון חדש"
+
+#: .\expenses\views.py:114
+msgid "Account created successfully."
+msgstr "משתמש חדש נוצר בהצלחה."
+
+#: .\expenses\views.py:119
+msgid "Add New Expense"
+msgstr "הוסף הוצאה חדשה"

@@ -1,5 +1,8 @@
 {% extends "base.html" %}
+<<<<<<< HEAD
 {% load i18n bootstrap3 %}
+=======
+>>>>>>> 02edcbea44de8185b99fa8ed39c6b6bd3ee12a1c
 
 {% block content %}
 
@@ -33,9 +36,6 @@
             </tr>
             </tfoot>
         </table>
-
-        {% bootstrap_pagination page_obj %}
-
     {% else %}
         {% trans "No expenses.... yet!" %}
     {% endif %}
