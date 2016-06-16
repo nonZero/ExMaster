@@ -22,3 +22,7 @@
 
         python manage.py createsuperuser
 
+* Generate content
+
+        python manage.py generate_blog_content
+
