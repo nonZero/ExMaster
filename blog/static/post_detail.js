@@ -1,6 +1,7 @@
 "use strict";
 
 $(function () {
+
     $("#commentform").submit(function () {
         var form = $(this);
         var data = {
@@ -13,5 +14,6 @@ $(function () {
             form.get(0).reset();
         });
         return false;
-    })
+    });
+
 });

@@ -7,6 +7,20 @@
 
     {{ object.content_html|safe }}
 
+    <p>
+
+{#    <form method="post" id="likeform">#}
+    <form method="post" id="likeform" action="{% url "blog:like" object.id %}">
+        {% csrf_token %}
+        <input type="hidden" name="like" value="1">
+        <button class="btn btn-primary" id="send"><i
+                class="glyphicon glyphicon-heart"></i> Like
+        </button>
+    </form>
+    </p>
+
+
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Add comment</h3>
