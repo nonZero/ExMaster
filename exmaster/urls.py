@@ -7,6 +7,7 @@ import expenses.views
 
 urlpatterns = [
     url(r'', include('expenses.urls')),
+    url(r'blog/', include('blog.urls')),
     url(r'^login/$', expenses.views.LoginView.as_view(), name='login'),
     url(r'^logout/$', expenses.views.LogoutView.as_view(), name='logout'),
     url(r'^admin/', admin.site.urls),

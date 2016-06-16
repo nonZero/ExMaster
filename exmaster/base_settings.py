@@ -27,6 +27,7 @@ INSTALLED_APPS = [
 
     # mine
     "expenses",
+    "blog",
 ]
 
 MIDDLEWARE_CLASSES = [
