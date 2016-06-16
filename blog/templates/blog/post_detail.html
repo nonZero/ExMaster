@@ -1,10 +1,32 @@
 {% extends "base.html" %}
+{% load bootstrap3 %}
 
 {% block content %}
 
     <h1>{{ object }}</h1>
 
     {{ object.content_html|safe }}
+
+    <ul class="list-group">
+    {% for comment in object.comments.all %}
+        <li class="list-group-item">
+            <p><b>{{ comment.title }} ({{ comment.user }})</b></p>
+            {{ comment.content|linebreaks }}
+        </li>
+    {% endfor %}
+        <li class="list-group-item">
+            <form method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button>Comment</button>
+            </form>
+        </li>
+
+    </ul>
+
+
+
+
 
 {% endblock %}
 
