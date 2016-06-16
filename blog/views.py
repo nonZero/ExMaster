@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.http import JsonResponse
 from django.shortcuts import redirect, render, get_object_or_404
@@ -31,6 +33,10 @@ class PostDetailView(LoggedInMixin, DetailView):
         else:
             # ADD COMMENT
             form = forms.CommentForm(request.POST)
+            if not form.is_valid():
+                return JsonResponse({
+                    'errors': json.loads(form.errors.as_json()),
+                }, status=400)
             form.instance.post = parent
             form.instance.user = request.user
             form.save()
@@ -49,7 +55,6 @@ class PostLikeView(LoggedInMixin, View):
         # parent = models.Post.objects.get(id=kwargs['pk'])
         # ADD/REMOVE LIKE
         assert False, "LIKE"
-
 
 # class MyView(View):
 #     def get(self, request, *args, **kwargs):

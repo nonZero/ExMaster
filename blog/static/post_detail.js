@@ -8,10 +8,13 @@ $(function () {
             title: $("#id_title").val(),
             content: $("#id_content").val()
         };
-        $.post("", data, function (resp) {
+        $.post("", data).then(function (resp) {
             var el = $(resp);
             $("#comments").prepend(el);
             form.get(0).reset();
+        }).fail(function(resp) {
+            console.error(resp.responseJSON);
+            alert('something bad happend');
         });
         return false;
     });
