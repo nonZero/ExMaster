@@ -1,0 +1,12 @@
+{% load humanize %}
+
+
+<li class="list-group-item">
+    <p>
+        <b>
+            {{ comment.title }} ({{ comment.user }})
+        </b>
+        <i title="{{ comment.created_at }}">{{ comment.created_at|naturaltime }}</i>
+    </p>
+    {{ comment.content|linebreaks }}
+</li>

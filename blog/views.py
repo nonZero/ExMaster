@@ -1,5 +1,6 @@
 from django.contrib import messages
-from django.shortcuts import redirect
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
 from django.views.generic import DetailView
 from django.views.generic.list import ListView
 
@@ -26,5 +27,10 @@ class PostDetailView(LoggedInMixin, DetailView):
         form.instance.post = parent
         form.instance.user = request.user
         form.save()
+        if request.is_ajax():
+            # return JsonResponse({'status': 'ok'})
+            return render(request, "blog/_comment.html", {
+                'comment': form.instance,
+            })
         messages.success(request, "Comments saved.")
         return redirect(parent)

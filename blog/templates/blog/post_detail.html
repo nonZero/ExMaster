@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load bootstrap3 %}
+{% load bootstrap3 staticfiles %}
 
 {% block content %}
 
@@ -7,26 +7,29 @@
 
     {{ object.content_html|safe }}
 
-    <ul class="list-group">
-    {% for comment in object.comments.all %}
-        <li class="list-group-item">
-            <p><b>{{ comment.title }} ({{ comment.user }})</b></p>
-            {{ comment.content|linebreaks }}
-        </li>
-    {% endfor %}
-        <li class="list-group-item">
-            <form method="post">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Add comment</h3>
+        </div>
+        <div class="panel-body">
+            <form method="post" id="commentform">
                 {% csrf_token %}
                 {% bootstrap_form form %}
-                <button>Comment</button>
+                <button class="btn btn-primary" id="send">Comment</button>
             </form>
-        </li>
-
+        </div>
+    </div>
+    <ul class="list-group" id="comments">
+        {% for comment in object.comments.all %}
+            {% include "blog/_comment.html" %}
+        {% endfor %}
     </ul>
 
 
+{% endblock %}
 
-
-
+{% block scripts %}
+    <script src="{% static "csrf.js" %}"></script>
+    <script src="{% static "post_detail.js" %}"></script>
 {% endblock %}
 
