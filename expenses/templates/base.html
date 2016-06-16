@@ -1,4 +1,5 @@
 {% load i18n staticfiles bootstrap3 %}
+{% get_current_language_bidi as BIDI %}
 
 <!DOCTYPE html>
 <html>
@@ -11,9 +12,15 @@
             {{ view.page_title }} | {% trans "ExMaster" %}
         {% endblock %}
     </title>
-    <link href="{% static "bootstrap/css/bootstrap-rtl.css" %}" rel="stylesheet">
+    {% if BIDI %}
+        <link href="{% static "bootstrap/css/bootstrap-rtl.css" %}"
+              rel="stylesheet">
+    {% else %}
+        <link href="{% static "bootstrap/css/bootstrap.css" %}"
+              rel="stylesheet">
+    {% endif %}
 </head>
-<body dir="rtl">
+<body{% if BIDI %} dir="rtl"{% endif %}>
 
 <div class="container">
 
